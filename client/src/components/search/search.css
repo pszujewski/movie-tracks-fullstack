@@ -1,0 +1,25 @@
+.search-wrapper {
+  margin-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.row h5 {
+  text-align: center;
+  font-style: italic;
+}
+
+/*.row form input {
+  width: 72% !important;
+  margin-right: 5px !important;
+}*/
+
+input {
+  width: 72% !important;
+  margin-right: 5px !important;
+}
+
+.btn {
+  width: 25% !important;
+  vertical-align: top !important;
+}
