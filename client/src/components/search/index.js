@@ -5,39 +5,65 @@ import {connect} from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 import './search.css';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+import {fetchMovie} from '../../actions';
+
 // {</*input placeholder='Enter a movie title here' className='search' type='text' />*/}
 // {/*<button className='btn'>Search</button>*/}
 
-export function Search(props) {
-  console.log(props.titles);
-  if (typeof props.titles !== 'undefined') {
-    return (
-      <div className='row search-wrapper'>
-        <div className='eight columns offset-by-two'>
-          <h5>Find and listen to music from your favorite movies.</h5>
-          <form>
-            <MuiThemeProvider>
-              <AutoComplete 
-                hintText='Enter a movie title here'
-                fullWidth={false} 
-                dataSource={props.titles}
-                underlineShow={false} 
-              />
-            </MuiThemeProvider>
-            <button className='btn'>Search</button>
-          </form>
+export class Search extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.searchTerm = '';
+  }
+
+  handleUpdateInput = inputVal => {
+    this.searchTerm = inputVal;
+  };
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.dispatch(fetchMovie(this.searchTerm));
+  }
+
+  render() {
+    if (typeof this.props.titles !== 'undefined') {
+      return (
+        <div className='row search-wrapper'>
+          <div className='eight columns offset-by-two'>
+            <h5>Find and listen to music from your favorite movies.</h5>
+            <form onSubmit={e => this.handleSubmit(e)}>
+              <div className='autocomplete-container'>
+                <MuiThemeProvider>
+                  <AutoComplete
+                    hintText='Enter a movie title here'
+                    fullWidth={true} 
+                    dataSource={this.props.titles}
+                    maxSearchResults={8}
+                    menuCloseDelay={100}
+                    underlineShow={true}
+                    onUpdateInput={inputVal => this.handleUpdateInput(inputVal)}
+                  />
+                </MuiThemeProvider>
+              </div>
+              <button className='btn'>Search</button>
+            </form>
+          </div>
         </div>
-      </div>
-    );
-  } 
-  else {
-    return (
-      <div>
-        <MuiThemeProvider>
-          <CircularProgress />
-        </MuiThemeProvider>
-      </div>
-    );
+      );
+    } 
+    else {
+      return (
+        <div>
+          <MuiThemeProvider>
+            <CircularProgress />
+          </MuiThemeProvider>
+        </div>
+      );
+    }
   }
 }
 

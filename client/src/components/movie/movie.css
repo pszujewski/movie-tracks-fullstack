@@ -1,0 +1,24 @@
+.left-well {
+  padding: 2% 0 0;
+}
+
+.movie-poster {
+  display: inline-block;
+  width: 100%;
+}
+
+.year {
+  text-align: right;
+}
+
+.desc {
+  margin-bottom: 0;
+}
+
+.second {
+  margin-top: 20px;
+}
+
+.final {
+  margin-top: 0;
+}

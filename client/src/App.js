@@ -5,6 +5,7 @@ import {fetchMovieTitles} from './actions';
 
 import Header from './components/header';
 import Search from './components/search';
+import Movie from './components/movie';
 
 export class App extends Component {
   
@@ -17,7 +18,7 @@ export class App extends Component {
       <div className='container'>
         <Header />
         <Search />
-        {/*console.log(this.props.titles)*/}
+        <Movie />
       </div>
     );
   }

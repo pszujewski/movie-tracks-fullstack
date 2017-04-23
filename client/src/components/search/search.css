@@ -9,17 +9,13 @@
   font-style: italic;
 }
 
-/*.row form input {
-  width: 72% !important;
-  margin-right: 5px !important;
-}*/
-
-input {
-  width: 72% !important;
-  margin-right: 5px !important;
+.autocomplete-container {
+  display: inline-block;
+  width: 73%;
+  margin-right: 12px;
 }
 
 .btn {
-  width: 25% !important;
-  vertical-align: top !important;
+  width: 25%; 
+  vertical-align: top;
 }
