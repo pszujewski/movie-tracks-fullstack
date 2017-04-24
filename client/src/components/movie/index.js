@@ -2,6 +2,10 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {connect} from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
+import FaStarO from 'react-icons/lib/fa/star-o';
+import FaStar from 'react-icons/lib/fa/star';
+import FaHeartO from 'react-icons/lib/fa/heart-o';
+//import FaHeart from 'react-icons/lib/fa/heart';
 import './movie.css';
 
 export function Movie(props) {
@@ -29,8 +33,14 @@ export function Movie(props) {
 
             <div className='ten columns'>
               <h4>{movie.title}</h4>
-              <div className='stars-container'></div>
-              <p>Add to favorites</p>
+              <div className='stars-container'>
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStarO />
+              </div>
+              <p><FaHeartO /> Add to favorites</p>
             </div>
             
             <div className='two columns' id='year-wrapper'>

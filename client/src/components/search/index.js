@@ -10,9 +10,6 @@ injectTapEventPlugin();
 
 import {fetchMovieAlbumData} from '../../actions';
 
-// {</*input placeholder='Enter a movie title here' className='search' type='text' />*/}
-// {/*<button className='btn'>Search</button>*/}
-
 export class Search extends React.Component {
 
   constructor(props) {

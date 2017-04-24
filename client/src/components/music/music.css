@@ -10,12 +10,12 @@
   width:100%;
 }
 
-.song {
-  padding:20px;
+.song, .song-on {
+  padding: 20px;
   cursor: pointer;
 }
 
-.song:hover {
+.song-on, .song:hover {
   color: #fff;
   background-color: #33c3f0;
 }

@@ -1,3 +1,14 @@
+export const PLAY_SONG = 'PLAY_SONG';
+export const playSong = song => ({
+    type: PLAY_SONG,
+    song
+});
+
+export const STOP_SONG = 'STOP_SONG';
+export const stopSong = () => ({
+    type: STOP_SONG
+});
+
 const MOVIE_API_KEY = "?api_key=1710c94a1d9a1c75e363bf47a0f446b3";
 
 // For querying the MovieDB for a movie title's ID
