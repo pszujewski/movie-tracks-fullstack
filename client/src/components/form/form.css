@@ -1,0 +1,16 @@
+.form-wrapper .title {
+  text-align: center;
+}
+
+.form-wrapper {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form-wrapper button {
+  margin-top: 10px;
+}
+
+.form-wrapper .anchor-bin {
+  text-align: center;
+}
