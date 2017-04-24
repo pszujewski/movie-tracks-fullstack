@@ -28,8 +28,8 @@ const getTitles = (url) => {
   return fetch(url).then(data => {
     return data.json();
   })
-  .then(dataJson => {
-    return dataJson.results.map(movie => {
+  .then(data => {
+    return data.results.map(movie => {
       return movie.title;
     });
   })
@@ -43,9 +43,9 @@ export const fetchMovieTitles = () => dispatch => {
     .then(data => {
       return data.json();
      })
-     .then(dataJson => {
+     .then(data => {
       const titles = [];
-      dataJson.genres.forEach(genre => {
+      data.genres.forEach(genre => {
         let url = makeTitlesUrl(genre.id);
         titles.push(getTitles(url));
       });
@@ -61,45 +61,123 @@ export const fetchMovieTitles = () => dispatch => {
     .catch(err => console.error(err));
 }
 
-// Actions for fetching one particular movie
-export const FETCH_MOVIE_REQUEST = 'FETCH_MOVIE_REQUEST';
-export const fetchMovieRequest = () => ({
-    type: FETCH_MOVIE_REQUEST,
+// Functions for getting Music data
+function getMusicData(userSearch) {
+  let spotifyUrl = new URL('https://api.spotify.com/v1/search/');
+  let albumQuery = {
+    q: userSearch,
+    type: 'album'
+  };
+  Object.keys(albumQuery).forEach(key => spotifyUrl.searchParams.append(key, albumQuery[key]));
+  return fetch(spotifyUrl).then(response => {
+    return response.json();
+  })
+  .then(res => {
+    return getAlbum(res, userSearch);
+  })
+  .catch(error => {
+    console.error(error);
+    return Promise.reject(error);
+  });
+}
+
+function getAlbum(response, searchTerm) {
+  let bestCandidate = response.albums.items[0];
+  let bestScore = 0;
+  response.albums.items.forEach((album, idx) => {
+    let newScore = 0;
+    if (album.name.toLowerCase().indexOf("soundtrack") !== -1) {
+      newScore += 10;
+    }
+    if (album.name.toLowerCase().indexOf("motion") !== -1) {
+      newScore += 7;
+    }
+    if (album.name.toLowerCase().indexOf("picture") !== -1) {
+      newScore += 7;
+    }
+    if (album.name.match(searchTerm)) {
+      newScore += 15;
+    }
+    if (newScore > bestScore) {
+      bestScore = newScore;
+      bestCandidate = album;
+    }
+  });
+  return getTracks(bestCandidate);
+}
+
+function getTracks(bestCandidate) {
+  const albumUrl = `https://api.spotify.com/v1/albums/${bestCandidate.id}`;
+  const albumData = {
+    albumTitle: bestCandidate.name,
+    albumSpotifyID: bestCandidate.id,
+    composer: bestCandidate.artists.name,
+    albumArtUrl: bestCandidate.images[1].url 
+  };
+  return fetch(albumUrl).then(response => response.json())
+  .then(data => {
+    albumData.tracks = data.tracks.items;
+    return albumData;
+  })
+  .catch(error => {
+    console.error(error);
+    return Promise.reject(error);
+  })
+}
+
+// For getting individual movie data
+function getMovieData(searchTerm) {
+  const searchUrl = getSearchMovieUrl(searchTerm);
+  return fetch(searchUrl).then(response => response.json())
+  .then(data => {
+    const id = data.results[0].id;
+    const urlSearchID = `https://api.themoviedb.org/3/movie/${id}${MOVIE_API_KEY}`
+    return fetch(urlSearchID).then(response => response.json())
+  })
+}
+
+// Actions for fetching music and movie data for one particular movie
+export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
+export const fetchDataRequest = () => ({
+    type: FETCH_DATA_REQUEST,
     loading: true
 });
 
-export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
-export const fetchMovieSuccess = movie => ({
-    type: FETCH_MOVIE_SUCCESS,
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const fetchDataSuccess = (movie, album) => ({
+    type: FETCH_DATA_SUCCESS,
     loading: false,
-    movie
+    movie,
+    album
 });
 
-export const fetchMovie = (searchTerm) => dispatch => {
-  dispatch(fetchMovieRequest());
-  const searchUrl = getSearchMovieUrl(searchTerm);
-  return fetch(searchUrl)
-  .then(data => data.json())
-  .then(dataJson => {
-    console.log('first response received');
-    console.log(dataJson);
-    const id = dataJson.results[0].id;
-    const urlSearchID = `https://api.themoviedb.org/3/movie/${id}${MOVIE_API_KEY}`
-    return fetch(urlSearchID)
-  })
-  .then(movie => movie.json())
-  .then(movieJson => {
-    console.log('second response received');
+export const fetchMovieAlbumData = (searchTerm) => dispatch => {
+  dispatch(fetchDataRequest());
+  const requests = [getMovieData(searchTerm), getMusicData(searchTerm)];
+  return Promise.all(requests)
+  .then(data => {
+    console.log('responses received -> movie and music data');
+    console.log(data);
+    const movie = data[0];
+    const music = data[1];
     const movieData = {
-      title: movieJson.title,
-      tagline: movieJson.tagline,
-      poster: `https://image.tmdb.org/t/p/w500${movieJson.poster_path}`,
-      year: movieJson.release_date.substr(0, 4),
-      description: movieJson.overview,
-      rating: movieJson.vote_average,
-      site: movieJson.homepage,
+      title: movie.title,
+      tagline: movie.tagline,
+      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+      year: movie.release_date.substr(0, 4),
+      description: movie.overview,
+      rating: movie.vote_average,
+      site: movie.homepage,
     };
-    return dispatch(fetchMovieSuccess(movieData))
+    const musicData = {
+      albumTitle: music.albumTitle,
+      albumSpotifyID: music.albumSpotifyID,
+      composer: music.composer,
+      albumArtUrl: music.albumArtUrl,
+      tracks: music.tracks 
+    };
+    return dispatch(fetchDataSuccess(movieData, musicData));
   })
   .catch(err => console.error(err));
 }
+

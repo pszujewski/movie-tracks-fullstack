@@ -1,0 +1,27 @@
+.album-title {
+  font-size:1.9em;
+  font-weight:bold;
+  margin-top: 40px;
+  border-top: 1px solid #888;
+  padding-top: 20px;
+}
+
+.album-art {
+  width:100%;
+}
+
+.song {
+  padding:20px;
+  cursor: pointer;
+}
+
+.song:hover {
+  color: #fff;
+  background-color: #33c3f0;
+}
+
+/*.fa.fa-play-circle, .fa.fa-stop-circle {
+  float: right;
+  font-size: 25px;
+  padding-left: 5px;
+}*/

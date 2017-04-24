@@ -14,8 +14,8 @@ export function Movie(props) {
       </div>
     );
   }
-  else if (Object.keys(props.movie.data).length > 0) {
-    const movie = props.movie.data;
+  else if (Object.keys(props.movie.movieData).length > 0) {
+    const movie = props.movie.movieData;
     return (
       <div className='movie row'> 
 

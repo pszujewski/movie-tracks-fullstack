@@ -6,6 +6,7 @@ import {fetchMovieTitles} from './actions';
 import Header from './components/header';
 import Search from './components/search';
 import Movie from './components/movie';
+import Music from './components/music';
 
 export class App extends Component {
   
@@ -19,6 +20,7 @@ export class App extends Component {
         <Header />
         <Search />
         <Movie />
+        <Music />
       </div>
     );
   }

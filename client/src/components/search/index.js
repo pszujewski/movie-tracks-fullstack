@@ -8,7 +8,7 @@ import './search.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import {fetchMovie} from '../../actions';
+import {fetchMovieAlbumData} from '../../actions';
 
 // {</*input placeholder='Enter a movie title here' className='search' type='text' />*/}
 // {/*<button className='btn'>Search</button>*/}
@@ -26,7 +26,8 @@ export class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(fetchMovie(this.searchTerm));
+    this.props.dispatch(fetchMovieAlbumData(this.searchTerm));
+    console.log('after dispatch');
   }
 
   render() {
