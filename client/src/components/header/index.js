@@ -14,7 +14,7 @@ export default function Header(props) {
       </div>
       <ul className='four columns u-pull-right'>
         <li className='four columns'>About</li>
-        <li className='four columns'>Log In</li>
+        <li className='four columns'><Link to='/login'>Log In</Link></li>
         <li className='four columns'><Link to='/signup'>Sign Up</Link></li>
       </ul>
     </nav>

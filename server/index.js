@@ -1,4 +1,4 @@
-// Configure environment variables
+// Configure environment variables for development
 require('dotenv').config();
 
 const path = require('path');
@@ -18,10 +18,10 @@ const {signUpRouter} = require('./routers/signUpRouter');
 const {logInRouter} = require('./routers/logInRouter');
 const {favoritesRouter} = require('./routers/favoritesRouter');
 
-// API endpoints go here!
-app.use('/signup', signUpRouter);
-app.use('/login', logInRouter);
-app.use('/favorites', favoritesRouter);
+// API Routers
+app.use('/api/signup', signUpRouter);
+app.use('/api/login', logInRouter);
+app.use('/api/favorites', favoritesRouter);
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

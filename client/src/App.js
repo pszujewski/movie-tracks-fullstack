@@ -7,7 +7,7 @@ import {fetchMovieTitles} from './actions';
 import Header from './components/header';
 import Home from './components/home';
 import Form from './components/form';
-// import Music from './components/music';
+import Notify from './components/notify';
 
 export class App extends Component {
   
@@ -16,7 +16,13 @@ export class App extends Component {
   }
 
   getForm(type) {
-    return <Form formType={type} />;
+    const isUser = Object.keys(this.props.user.data).length > 0;
+    if (isUser) {
+      return <Notify />;
+    } 
+    else  {
+      return <Form formType={type} />;
+    }
   }
 
   render() {
@@ -33,4 +39,8 @@ export class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (state) => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(App);
