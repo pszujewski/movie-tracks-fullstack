@@ -14,10 +14,10 @@ export default function Header(props) {
       </div>
       <div className='five columns'>
         <ul className='row'>
-          <li className='three columns'>About</li>
+          <li className='three columns'><Link to='/'>Search</Link></li>
           <li className='three columns'><Link to='/login'>Log In</Link></li>
           <li className='three columns'><Link to='/signup'>Sign Up</Link></li>
-          <li className='three columns'>Favorites</li>
+          <li className='three columns'><Link to='/favorites'>Favorites</Link></li>
         </ul>
       </div>
     </nav>

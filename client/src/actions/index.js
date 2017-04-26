@@ -137,7 +137,7 @@ function getTracks(bestCandidate) {
 }
 
 // For getting individual movie data
-function getMovieData(searchTerm) {
+export function getMovieData(searchTerm) {
   const searchUrl = getSearchMovieUrl(searchTerm);
   return fetch(searchUrl).then(response => response.json())
   .then(data => {

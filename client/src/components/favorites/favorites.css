@@ -1,0 +1,25 @@
+.favorites-view li {
+  list-style-type: none;
+}
+
+.favorites-view .favs-title {
+  text-align: center;
+}
+
+.favs-bin {
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+.poster-wrapper img {
+  width: 100%;
+}
+
+.btn-remove {
+  color: #f44336;
+  border: 1px solid #f44336;
+}
+
+.btn-bin:first-child {
+  display: inline-block;
+}

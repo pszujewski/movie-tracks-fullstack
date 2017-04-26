@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-full-stack-template-v2",
+  "name": "movie-tracks",
   "version": "0.1.0",
-  "description": "A full-stack starter template",
+  "description": "movie and song database",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -18,7 +18,7 @@
     "server/node_modules",
     "client/node_modules"
   ],
-  "author": "Joe Turner <jturner@thinkful.com>",
+  "author": "Peter Szujewski <pszujewski@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "cross-env": "^3.1.4",

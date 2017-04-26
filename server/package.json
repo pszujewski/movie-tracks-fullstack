@@ -1,12 +1,12 @@
 {
-  "name": "thinkful-full-stack-template-server",
+  "name": "movie-tracks",
   "version": "0.1.0",
-  "description": "Server portion of a full-stack starter template",
+  "description": "Server",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Joe Turner <jturner@thinkful.com>",
+  "author": "Peter Szujewski <pszujewski@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

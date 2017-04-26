@@ -2,6 +2,7 @@ import React from 'react';
 import './form.css';
 import {postSignUp, fetchLogInData} from '../../actions/register';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class Form extends React.Component {
 
@@ -40,7 +41,7 @@ export class Form extends React.Component {
           <input placeholder='1234pw' className="u-full-width" type="text" id='password' required ref={input => this.password = input} />
           <button className="u-full-width btn-sign-in">Sign up</button>
           <div className='anchor-bin'>
-            <a id='js-new-acct'>Already have an account? Log in here</a>
+            <p><Link to='/login'>Already have an account? Log in here</Link></p>
           </div>
         </form>
       );
@@ -54,7 +55,7 @@ export class Form extends React.Component {
           <input placeholder='1234pw' className="u-full-width" type="text" id='password' required ref={input => this.password = input} />
           <button className="u-full-width btn-sign-in">Log In</button>
           <div className='anchor-bin'>
-            <a id='js-new-acct'>Don't have an account? Sign up here</a>
+            <p><Link to='/signup'>Don't have an account? Sign up here</Link></p>
           </div>
         </form>
       );

@@ -8,19 +8,19 @@ nav {
   margin-top: 40px;
 }
 
-.row h2 {
+nav h2 {
   text-align: center;
 }
 
-.row h1 {
+nav h1 {
   margin-left: 10px;
 }
 
-ul {
+nav ul {
   padding-top: 20px; 
 }
 
-ul li {
+nav ul li {
   list-style-type: none;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -30,7 +30,7 @@ ul li {
   text-align: center;
 }
 
-ul li:hover {
+nav ul li:hover {
   color: rgb(0, 188, 212);
   cursor: pointer;
   /*border: 1px solid black;

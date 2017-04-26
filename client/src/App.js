@@ -8,6 +8,8 @@ import Header from './components/header';
 import Home from './components/home';
 import Form from './components/form';
 import Notify from './components/notify';
+import Favorites from './components/favorites';
+import FavoriteNotify from './components/favoritenotify';
 
 export class App extends Component {
   
@@ -25,6 +27,16 @@ export class App extends Component {
     }
   }
 
+  getFavorites() {
+    const isUser = Object.keys(this.props.user.data).length > 0;
+    if (isUser) {
+      return <Favorites />;
+    } 
+    else  {
+      return <FavoriteNotify />;
+    }
+  }
+
   render() {
     return (
       <Router> 
@@ -33,6 +45,7 @@ export class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={() => this.getForm('signup')} />
           <Route exact path="/login" component={() => this.getForm('login')} />
+          <Route exact path="/favorites" component={() => this.getFavorites()} />
         </div>
       </Router> 
     );
