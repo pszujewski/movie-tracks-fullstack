@@ -6,17 +6,20 @@ import './header.css';
 export default function Header(props) {
   return (
     <nav className='row'>
-      <div className='eight columns'>
+      <div className='seven columns'>
         <div className='flexbox'>
           <h2><FaFilm /></h2>
           <h1><Link to='/'>Movie Tracks</Link></h1>
         </div>
       </div>
-      <ul className='four columns u-pull-right'>
-        <li className='four columns'>About</li>
-        <li className='four columns'><Link to='/login'>Log In</Link></li>
-        <li className='four columns'><Link to='/signup'>Sign Up</Link></li>
-      </ul>
+      <div className='five columns'>
+        <ul className='row'>
+          <li className='three columns'>About</li>
+          <li className='three columns'><Link to='/login'>Log In</Link></li>
+          <li className='three columns'><Link to='/signup'>Sign Up</Link></li>
+          <li className='three columns'>Favorites</li>
+        </ul>
+      </div>
     </nav>
   );
 }

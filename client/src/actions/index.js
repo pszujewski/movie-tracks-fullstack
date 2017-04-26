@@ -167,8 +167,6 @@ export const fetchMovieAlbumData = (searchTerm) => dispatch => {
   const requests = [getMovieData(searchTerm), getMusicData(searchTerm)];
   return Promise.all(requests)
   .then(data => {
-    console.log('responses received -> movie and music data');
-    console.log(data);
     const movie = data[0];
     const music = data[1];
     const movieData = {

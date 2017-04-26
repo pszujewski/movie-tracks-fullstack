@@ -22,24 +22,45 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', jsonParser, (req, res) => {
+router.put('/', jsonParser, (req, res) => {
   // get user id and use to update user's info from db
-  const {sessionId} = req.cookies;
-  const {id, title, poster} = req.body;
-  const newFavorite = {title, poster};
+  const {id, title} = req.body;
+  const newFavorite = {title};
   return User.findByIdAndUpdate(
-    sessionId, 
-    {$push: {'favorites': newFavorite}},
+    id, 
+    {$push: {favorites: newFavorite}},
     {safe: true, upsert: true, new: true})
     .exec()
-    .then(result => { 
-      console.log(result);
-      return res.status(202).send(result); 
+    .then(result => {
+      const userDoc = result.apiRepr(); 
+      return res.status(201).json(userDoc); 
     })
     .catch(error => {
       console.error(error);
     });
-})
+});
 
+router.delete('/', jsonParser, (req, res) => {
+  const {userId} = req.body;
+  const {movieId} = req.body;
+  return User.findByIdAndUpdate(
+    userId,
+    { $pull: { favorites: { _id: movieId } } },
+    {safe: true}
+  )
+  .exec()
+  .then(isDone => {
+    return User
+      .findById(userId).exec();
+  })
+  .then(userDoc => {
+    const user = userDoc.apiRepr();
+    return res.status(200).json(user);
+  })
+  .catch(error => {
+    console.error(error);
+    return res.status(500).json({messsage: 'error'});
+  });
+});
 
 module.exports = {favoritesRouter: router};

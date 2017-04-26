@@ -14,10 +14,8 @@ export class Music extends React.Component{
   }
 
   componentDidUpdate() {
-    console.log('Receiving update');
     if (this.props.audio.isPlaying) {
       this.playSong().then(isOver => {
-        console.log(isOver);
         return this.props.dispatch(stopSong());
       })
       .catch(err => console.error(err));

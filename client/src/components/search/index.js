@@ -24,7 +24,6 @@ export class Search extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.dispatch(fetchMovieAlbumData(this.searchTerm));
-    console.log('after dispatch');
   }
 
   render() {
