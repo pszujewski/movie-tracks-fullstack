@@ -27,16 +27,15 @@ export class Movie extends React.Component {
       this.isUser = true;
       for (let i=0; i<user.favorites.length; i++) {
         if (user.favorites[i].title === this.props.title) {
-          console.log('hello');
           this.isFavorite = true;
           this.movieId = user.favorites[i]._id;
-          return <FaHeart onClick={e => this.handleRemoveFavorite(e)} />;
+          return <FaHeart className='heart' onClick={e => this.handleRemoveFavorite(e)} />;
         }
       }
-      return <FaHeartO onClick={e => this.handleAddFavorite(e)} />;
+      return <FaHeartO className='heart' onClick={e => this.handleAddFavorite(e)} />;
     }
     else {
-      return <FaHeartO onClick={e => alert('Sign up to track your favorites!')} />;
+      return <FaHeartO className='heart' onClick={e => alert('Sign up to track your favorites!')} />;
     }
   }
 

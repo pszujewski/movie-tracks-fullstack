@@ -5,7 +5,7 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 
-const {DATABASE_URL} = require('./config');
+const { DATABASE_URL } = require('./config');
 
 const app = express();
 

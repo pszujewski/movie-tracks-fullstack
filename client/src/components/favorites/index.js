@@ -93,7 +93,7 @@ export class Favorites extends React.Component {
   }
 
   getInstructions() {
-    if (this.state.favorites.length === 0) {
+    if (this.props.user.favorites.length === 0) {
       return (
         <div className='instructions'>
           <h3>Click on the <FaHeartO /> icon to add a movie here</h3>

@@ -22,3 +22,7 @@
 .final {
   margin-top: 0;
 }
+
+.heart:hover {
+  cursor: pointer;
+}
