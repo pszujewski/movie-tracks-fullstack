@@ -8,7 +8,7 @@ import './search.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import {fetchMovieAlbumData} from '../../actions';
+import {fetchMovieAlbumData, stopSong} from '../../actions';
 
 export class Search extends React.Component {
 
@@ -23,7 +23,15 @@ export class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(fetchMovieAlbumData(this.searchTerm));
+    this.handleNewReq(this.searchTerm);
+  }
+
+  handleNewReq(search) {
+    console.log('handleNewReq called');
+    if (this.props.audio.isPlaying) {
+      this.props.dispatch(stopSong());
+    }
+    this.props.dispatch(fetchMovieAlbumData(search));
   }
 
   render() {
@@ -31,7 +39,7 @@ export class Search extends React.Component {
       return (
         <div className='row search-wrapper'>
           <div className='eight columns offset-by-two'>
-            <h5>Find and listen to music from your favorite movies.</h5>
+            <h5>Listen to music from your favorite movies.</h5>
             <form onSubmit={e => this.handleSubmit(e)}>
               <div className='autocomplete-container'>
                 <MuiThemeProvider>
@@ -43,6 +51,7 @@ export class Search extends React.Component {
                     menuCloseDelay={100}
                     underlineShow={true}
                     onUpdateInput={inputVal => this.handleUpdateInput(inputVal)}
+                    onNewRequest={input => this.handleNewReq(input)}
                   />
                 </MuiThemeProvider>
               </div>
@@ -65,7 +74,8 @@ export class Search extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  titles: state.autoComplete.titles
+  titles: state.autoComplete.titles,
+  audio: state.audio
 });
 
 export default connect(mapStateToProps)(Search);

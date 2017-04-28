@@ -1,0 +1,24 @@
+.faded {
+  top: 0;
+  left: 0;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.dynamic-background {
+  z-index: -1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-position: center top;
+  /*background-attachment: fixed;*/
+  background-repeat: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

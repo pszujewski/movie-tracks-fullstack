@@ -36,7 +36,7 @@ export class Movie extends React.Component {
       return <FaHeartO onClick={e => this.handleAddFavorite(e)} />;
     }
     else {
-      return <FaHeartO onClick={e => console.log('Not logged in')} />;
+      return <FaHeartO onClick={e => alert('Sign up to track your favorites!')} />;
     }
   }
 
@@ -56,6 +56,35 @@ export class Movie extends React.Component {
       movieId: component.movieId
     };
     this.props.dispatch(deleteFavorite(ids));
+  }
+
+  getStars() {
+    const movie = this.props.movie.movieData;
+    let end;
+    let stars = [];
+    switch (true) {
+      case movie.rating <= 5:
+        end = 2; 
+        break;
+      case movie.rating < 7.5 && movie.rating > 5:
+        end = 3; 
+        break;
+      case movie.rating <= 8 && movie.rating >= 7.5:
+        end = 4; 
+        break;
+      case movie.rating > 8:
+        end = 5; 
+        break;
+      default:
+        break;
+    }
+    for (let i=1; i <= end; i++) {
+      stars.push(<FaStar key={`first${i}`} />);
+    }
+    for (let i=1; i <= (5 - end); i++) {
+      stars.push(<FaStarO key={`second${i}`} />);
+    }
+    return stars;
   }
 
   render() {
@@ -84,11 +113,7 @@ export class Movie extends React.Component {
               <div className='ten columns'>
                 <h4>{movie.title}</h4>
                 <div className='stars-container'>
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStarO />
+                 {this.getStars()}
                 </div>
                 <p>{this.getHeart()} Add to favorites</p>
               </div>

@@ -63,12 +63,4 @@ router.post('/', jsonParser, (req, res) => {
     });
 });
 
-//for convenience of looking at current database
-router.get('/users', (req, res) => {
-  User.find({}).exec()
-  .then(users => {
-    res.json(users);
-  });
-});
-
 module.exports = {signUpRouter: router};

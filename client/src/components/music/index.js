@@ -38,16 +38,13 @@ export class Music extends React.Component{
   handlePlaySong(e) {
     const song = e.target.dataset
     if (this.props.audio.isPlaying && song.track_num === this.props.audio.song.track_num) {
-      console.log('stop');
       return this.props.dispatch(stopSong());
     }
     else if (!this.props.audio.isPlaying) {
-      console.log('play');
       const newSong = {
         track_num: song.track_num, 
         audioUrl: song.audio
       };
-      //console.log(newSong);
       return this.props.dispatch(playSong(newSong));
     }
   }

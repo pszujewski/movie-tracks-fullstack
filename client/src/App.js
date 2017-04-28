@@ -10,6 +10,7 @@ import Form from './components/form';
 import Notify from './components/notify';
 import Favorites from './components/favorites';
 import FavoriteNotify from './components/favoritenotify';
+import DynamicBackGround from './components/dynamic-bground';
 
 export class App extends Component {
   
@@ -39,13 +40,16 @@ export class App extends Component {
 
   render() {
     return (
-      <Router> 
-        <div className='container'>
-          <Header />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={() => this.getForm('signup')} />
-          <Route exact path="/login" component={() => this.getForm('login')} />
-          <Route exact path="/favorites" component={() => this.getFavorites()} />
+      <Router>
+        <div>
+          <DynamicBackGround />
+          <div className='container'>
+            <Header />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={() => this.getForm('signup')} />
+            <Route exact path="/login" component={() => this.getForm('login')} />
+            <Route exact path="/favorites" component={() => this.getFavorites()} />
+          </div>
         </div>
       </Router> 
     );
