@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './favoritenotify.css';
 
 export default function FavoriteNotify(props) {
   return (

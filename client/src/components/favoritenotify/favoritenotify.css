@@ -1,0 +1,13 @@
+.favorite-notify {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.favorite-notify .btn-bin {
+  display: inline-block;
+}
+
+.favorite-notify button {
+  margin-right: 5px;
+  margin-left: 5px;
+}

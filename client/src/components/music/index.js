@@ -62,9 +62,11 @@ export class Music extends React.Component{
     if (this.props.movie.loading) {
       return (
         <div>
-          <MuiThemeProvider>
-            <CircularProgress />
-          </MuiThemeProvider>
+          <div className='spinner'>
+            <MuiThemeProvider>
+              <CircularProgress />
+            </MuiThemeProvider>
+          </div>
         </div>
       );
     } 

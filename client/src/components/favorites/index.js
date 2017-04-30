@@ -3,10 +3,12 @@ import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import './favorites.css';
 import FaHeartO from 'react-icons/lib/fa/heart-o';
+// import CircularProgress from 'material-ui/CircularProgress';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import {getMovieData} from '../../actions';
-import {fetchMovieAlbumData} from '../../actions';
-import {deleteFavorite} from '../../actions/favorites';
+import { getMovieData } from '../../actions';
+import { fetchMovieAlbumData } from '../../actions';
+import { deleteFavorite } from '../../actions/favorites';
 
 export class Favorites extends React.Component {
   
@@ -97,7 +99,9 @@ export class Favorites extends React.Component {
       return (
         <div className='instructions'>
           <h3>Click on the <FaHeartO /> icon to add a movie here</h3>
-          <Link to='/'><button>Start Searching</button></Link>
+          <div className='btm-bin'>
+            <Link to='/'><button>Start Searching</button></Link>
+          </div>
         </div>
       );
     }
@@ -114,7 +118,7 @@ export class Favorites extends React.Component {
           {this.getFavsList()}
         </ul>
       </div>
-    );
+    );   
   }
 }
 

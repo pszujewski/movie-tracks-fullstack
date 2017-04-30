@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {signOut} from '../../actions/register';
+import './notify.css';
 
 export function Notify(props) {
 

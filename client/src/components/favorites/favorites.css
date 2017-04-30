@@ -1,8 +1,14 @@
+.favorites-view {
+  margin-bottom: 80px;
+}
+
 .favorites-view li {
   list-style-type: none;
 }
 
 .favorites-view .favs-title {
+  margin-top: 50px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -21,5 +27,13 @@
 }
 
 .btn-bin:first-child {
+  display: inline-block;
+}
+
+.instructions {
+  text-align: center;
+}
+
+.instructions .btm-bin {
   display: inline-block;
 }

@@ -27,10 +27,10 @@ export class Search extends React.Component {
   }
 
   handleNewReq(search) {
-    console.log('handleNewReq called');
     if (this.props.audio.isPlaying) {
       this.props.dispatch(stopSong());
     }
+    console.log(search);
     this.props.dispatch(fetchMovieAlbumData(search));
   }
 
@@ -55,7 +55,9 @@ export class Search extends React.Component {
                   />
                 </MuiThemeProvider>
               </div>
-              <button className='btn'>Search</button>
+              <div className='search-btn-wrapper'>
+                <button className='btn'>Search</button>
+              </div>
             </form>
           </div>
         </div>

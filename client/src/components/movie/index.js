@@ -1,7 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {connect} from 'react-redux';
-import CircularProgress from 'material-ui/CircularProgress';
+import { connect } from 'react-redux';
 import FaStarO from 'react-icons/lib/fa/star-o';
 import FaStar from 'react-icons/lib/fa/star';
 import FaHeartO from 'react-icons/lib/fa/heart-o';
@@ -87,16 +85,7 @@ export class Movie extends React.Component {
   }
 
   render() {
-    if (this.props.movie.loading) {
-      return (
-        <div>
-          <MuiThemeProvider>
-            <CircularProgress />
-          </MuiThemeProvider>
-        </div>
-      );
-    }
-    else if (Object.keys(this.props.movie.movieData).length > 0) {
+    if (Object.keys(this.props.movie.movieData).length > 0) {
       const movie = this.props.movie.movieData;
       return (
         <div className='movie row'> 
@@ -114,7 +103,7 @@ export class Movie extends React.Component {
                 <div className='stars-container'>
                  {this.getStars()}
                 </div>
-                <p>{this.getHeart()} Add to favorites</p>
+                <p className='fav-heart-item'>{this.getHeart()} Add to favorites</p>
               </div>
               
               <div className='two columns' id='year-wrapper'>

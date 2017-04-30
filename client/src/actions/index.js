@@ -41,6 +41,9 @@ const getTitles = (url) => {
   })
   .then(data => {
     return data.results.map(movie => {
+      if (movie.title === "Harry Potter and the Philosopher's Stone") {
+        return "Harry Potter and the Sorcerer's Stone";
+      }
       return movie.title;
     });
   })
@@ -66,8 +69,13 @@ export const fetchMovieTitles = () => dispatch => {
       titles = titles.reduce((flat, toFlatten) => {
         return flat.concat(toFlatten);
       }, []);
-      dispatch(fetchTitlesSuccess(titles));
-      return Promise.resolve();
+      let filteredTitles = [];
+      titles.forEach(title => {
+        if (filteredTitles.indexOf(title) === -1) {
+          filteredTitles.push(title);
+        }
+      });
+      return dispatch(fetchTitlesSuccess(filteredTitles));
     })
     .catch(err => console.error(err));
 }

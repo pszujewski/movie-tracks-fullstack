@@ -5,7 +5,7 @@ import './dynamic-bground.css';
 export function DynamicBackGround(props) {
   function getImage() {
     if (typeof props.movie.poster !== 'undefined') {
-      return { "background-image": `url(${props.movie.poster})` };
+      return { "backgroundImage": `url(${props.movie.poster})` };
     }
   }
   return (

@@ -1,10 +1,10 @@
-.left-well {
-  padding: 2% 0 0;
-}
-
 .movie-poster {
   display: inline-block;
   width: 100%;
+}
+
+.fav-heart-item {
+  font-size: 20px;
 }
 
 .year {
@@ -25,4 +25,10 @@
 
 .heart:hover {
   cursor: pointer;
+}
+
+@media (max-width: 415px) {
+  .year {
+    text-align: left;
+  }
 }

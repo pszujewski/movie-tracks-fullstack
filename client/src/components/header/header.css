@@ -3,9 +3,11 @@
 }
 
 nav {
-  padding-left: 20px;
-  padding-right: 20px;
   margin-top: 40px;
+}
+
+nav a {
+  cursor: pointer;
 }
 
 nav h2 {
@@ -17,7 +19,7 @@ nav h1 {
 }
 
 nav ul {
-  padding-top: 20px; 
+  padding-top: 20px;
 }
 
 nav ul li {
@@ -28,11 +30,47 @@ nav ul li {
   padding-right: 5px;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
 }
 
 nav ul li:hover {
   color: rgb(0, 188, 212);
-  cursor: pointer;
   /*border: 1px solid black;
   border-radius: 3px;*/
 }
+
+@media (max-width: 870px) {
+  nav {
+    text-align: center;
+  }
+  .links-bin {
+    width: 100% !important;
+    margin-left: 0 !important;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  nav ul {
+    padding-top: 0px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  nav ul li {
+    margin-bottom: 3px;
+    margin-top: 3px;
+  }
+  .logo-bin {
+    width: 100% !important;
+  }
+  nav .flexbox-container {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 550px) {
+  nav h1 {
+   position: relative;
+   top: 4px;
+  }
+}
+

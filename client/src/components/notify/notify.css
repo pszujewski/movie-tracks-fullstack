@@ -1,0 +1,8 @@
+.notify {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.notify .btn-container {
+  display: inline-block;
+}
