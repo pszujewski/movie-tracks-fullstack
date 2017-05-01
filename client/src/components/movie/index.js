@@ -124,6 +124,13 @@ export class Movie extends React.Component {
         </div>  
       );
     }
+    else if (Object.keys(this.props.movie.movieData).length === 0 && this.props.movie.error) {
+      return (
+        <div className='error-msg-wrapper'>
+          <h4>Oops... Couldn't find the soundtrack. Please search for a different title</h4>
+        </div>
+      );
+    }
     else {
       return (
         <div></div>

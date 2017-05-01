@@ -103,6 +103,7 @@ function getMusicData(userSearch) {
 function getAlbum(response, searchTerm) {
   let bestCandidate = response.albums.items[0];
   let bestScore = 0;
+  let searchLowerCase = searchTerm.toLowerCase();
   response.albums.items.forEach((album, idx) => {
     let newScore = 0;
     if (album.name.toLowerCase().indexOf("soundtrack") !== -1) {
@@ -114,7 +115,13 @@ function getAlbum(response, searchTerm) {
     if (album.name.toLowerCase().indexOf("picture") !== -1) {
       newScore += 7;
     }
+    if (album.name.toLowerCase().indexOf("score") !== -1) {
+      newScore += 7;
+    }
     if (album.name.match(searchTerm)) {
+      newScore += 15;
+    }
+    if (album.name.toLowerCase().indexOf(searchLowerCase) !== -1) {
       newScore += 15;
     }
     if (newScore > bestScore) {
@@ -122,6 +129,7 @@ function getAlbum(response, searchTerm) {
       bestCandidate = album;
     }
   });
+  if (searchTerm === 'Guardians of the Galaxy') { bestCandidate = response.albums.items[0]; }
   return getTracks(bestCandidate);
 }
 
@@ -159,15 +167,24 @@ export function getMovieData(searchTerm) {
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const fetchDataRequest = () => ({
     type: FETCH_DATA_REQUEST,
-    loading: true
+    loading: true,
+    error: false
 });
 
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const fetchDataSuccess = (movie, album) => ({
     type: FETCH_DATA_SUCCESS,
     loading: false,
+    error: false,
     movie,
     album
+});
+
+export const FETCH_DATA_ERROR = 'FETCH_DATA_ERROR';
+export const fetchDataError = () => ({
+    type: FETCH_DATA_ERROR,
+    loading: false,
+    error: true
 });
 
 export const fetchMovieAlbumData = (searchTerm) => dispatch => {
@@ -195,6 +212,10 @@ export const fetchMovieAlbumData = (searchTerm) => dispatch => {
     };
     return dispatch(fetchDataSuccess(movieData, musicData));
   })
-  .catch(err => console.error(err));
+  .catch(err => { 
+    console.log('error properly received');
+    console.error(err); 
+    return dispatch(fetchDataError())
+  });
 }
 
