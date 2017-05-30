@@ -9,7 +9,7 @@ export function Browse(props) {
   function handleClick(event, idx) {
     event.preventDefault();
     const movie = props.titles[idx];
-    props.dispatch(fetchMovieAlbumData(movie));
+    props.dispatch(fetchMovieAlbumData(movie, props.accessToken));
   }
 
   function doTitles() {
@@ -35,7 +35,8 @@ export function Browse(props) {
 }
 
 const mapStateToProps = (state) => ({
-  titles: state.autoComplete.titles
+  titles: state.autoComplete.titles,
+  accessToken: state.movie.accessToken
 });
 
 export default connect(mapStateToProps)(Browse);

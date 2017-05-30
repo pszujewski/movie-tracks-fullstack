@@ -41,11 +41,26 @@ export class Music extends React.Component{
       return this.props.dispatch(stopSong());
     }
     else if (!this.props.audio.isPlaying) {
-      const newSong = {
-        track_num: song.track_num, 
-        audioUrl: song.audio
-      };
-      return this.props.dispatch(playSong(newSong));
+      return fetch(song.audio, {
+        headers: {
+          'Authorization': `Bearer ${this.props.movie.accessToken}`
+        }
+      }).then(response => response.json())
+      .then(fetchedTrack => {
+        console.log(fetchedTrack);
+        const newSong = {
+          track_num: song.track_num, 
+          audioUrl: fetchedTrack.preview_url
+        };
+        if (fetchedTrack.preview_url !== null) {
+          return this.props.dispatch(playSong(newSong));
+        }
+        else {
+          alert('Track is currently unavailable due to recent changes to the Spotify Web API. Please try a different track');
+          console.error('track is unavailable');
+        }
+      })
+      .catch(err => console.error(err));
     }
   }
 
@@ -77,7 +92,7 @@ export class Music extends React.Component{
         return <li key={idx}
                   {...classAttr} 
                   data-track_num={track.track_number}
-                  data-audio={track.preview_url} 
+                  data-audio={track.href} 
                   onClick={e => this.handlePlaySong(e)}>
                   {track.name}
                 </li>;

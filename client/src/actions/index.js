@@ -80,27 +80,58 @@ export const fetchMovieTitles = () => dispatch => {
     .catch(err => console.error(err));
 }
 
+export const ACCESS_TOKEN_REQ = 'ACCESS_TOKEN_REQ';
+export const accessTokenReq = () => ({
+    type: ACCESS_TOKEN_REQ,
+    loading: true,
+    error: false
+});
+
+export const ACCESS_TOKEN_SUCCESS = 'ACCESS_TOKEN_SUCCESS';
+export const accessTokenSuccess = accessToken => ({
+    type: ACCESS_TOKEN_SUCCESS,
+    loading: false,
+    error: false,
+    accessToken
+});
+
+export const getAccessToken = () => dispatch => {
+  dispatch(accessTokenReq());
+  return fetch('/api/spotify/access-token').then(res => res.json())
+    .then(result => { 
+      return dispatch(accessTokenSuccess(result.body.access_token)); 
+    })
+    .catch(err => console.error(err));
+}
+
 // Functions for getting Music data
-function getMusicData(userSearch) {
+function getMusicData(userSearch, accessToken) {
   let spotifyUrl = new URL('https://api.spotify.com/v1/search/');
   let albumQuery = {
     q: userSearch,
     type: 'album'
   };
   Object.keys(albumQuery).forEach(key => spotifyUrl.searchParams.append(key, albumQuery[key]));
-  return fetch(spotifyUrl).then(response => {
+  return fetch(spotifyUrl, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .then(response => {
     return response.json();
   })
   .then(res => {
-    return getAlbum(res, userSearch);
+    return getAlbum(res, userSearch, accessToken);
   })
   .catch(error => {
+    // If error is due to invalid token, get a new token here with getAccessToken()
+    // and then call the getMusicData function again
     console.error(error);
     return Promise.reject(error);
   });
 }
 
-function getAlbum(response, searchTerm) {
+function getAlbum(response, searchTerm, accessToken) {
   let bestCandidate = response.albums.items[0];
   let bestScore = 0;
   let searchLowerCase = searchTerm.toLowerCase();
@@ -130,10 +161,10 @@ function getAlbum(response, searchTerm) {
     }
   });
   if (searchTerm === 'Guardians of the Galaxy') { bestCandidate = response.albums.items[0]; }
-  return getTracks(bestCandidate);
+  return getTracks(bestCandidate, accessToken);
 }
 
-function getTracks(bestCandidate) {
+function getTracks(bestCandidate, accessToken) {
   const albumUrl = `https://api.spotify.com/v1/albums/${bestCandidate.id}`;
   const albumData = {
     albumTitle: bestCandidate.name,
@@ -141,7 +172,11 @@ function getTracks(bestCandidate) {
     composer: bestCandidate.artists.name,
     albumArtUrl: bestCandidate.images[1].url 
   };
-  return fetch(albumUrl).then(response => response.json())
+  return fetch(albumUrl, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  }).then(response => response.json())
   .then(data => {
     albumData.tracks = data.tracks.items;
     return albumData;
@@ -187,9 +222,9 @@ export const fetchDataError = () => ({
     error: true
 });
 
-export const fetchMovieAlbumData = (searchTerm) => dispatch => {
+export const fetchMovieAlbumData = (searchTerm, accessToken) => dispatch => {
   dispatch(fetchDataRequest());
-  const requests = [getMovieData(searchTerm), getMusicData(searchTerm)];
+  const requests = [getMovieData(searchTerm), getMusicData(searchTerm, accessToken)];
   return Promise.all(requests)
   .then(data => {
     const movie = data[0];

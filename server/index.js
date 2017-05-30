@@ -14,14 +14,16 @@ const app = express();
 mongoose.Promise = global.Promise;
 
 // Require the routers
-const {signUpRouter} = require('./routers/signUpRouter');
-const {logInRouter} = require('./routers/logInRouter');
-const {favoritesRouter} = require('./routers/favoritesRouter');
+const { signUpRouter } = require('./routers/signUpRouter');
+const { logInRouter } = require('./routers/logInRouter');
+const { favoritesRouter } = require('./routers/favoritesRouter');
+const { spotify } = require('./routers/spotify');
 
 // API Routers
 app.use('/api/signup', signUpRouter);
 app.use('/api/login', logInRouter);
 app.use('/api/favorites', favoritesRouter);
+app.use('/api/spotify', spotify);
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

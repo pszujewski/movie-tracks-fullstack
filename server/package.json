@@ -19,6 +19,7 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "spotify-web-api-node": "^2.4.0"
   }
 }

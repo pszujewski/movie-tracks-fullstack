@@ -23,6 +23,9 @@ export class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+     if (this.props.audio.isPlaying) {
+      this.props.dispatch(stopSong());
+    }
     this.handleNewReq(this.searchTerm);
   }
 
@@ -30,8 +33,7 @@ export class Search extends React.Component {
     if (this.props.audio.isPlaying) {
       this.props.dispatch(stopSong());
     }
-    console.log(search);
-    this.props.dispatch(fetchMovieAlbumData(search));
+    this.props.dispatch(fetchMovieAlbumData(search, this.props.accessToken));
   }
 
   render() {
@@ -75,8 +77,9 @@ export class Search extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   titles: state.autoComplete.titles,
+  accessToken: state.movie.accessToken,
   audio: state.audio
 });
 

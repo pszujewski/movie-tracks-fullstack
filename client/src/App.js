@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-// Redirect
 import { fetchMovieTitles } from './actions';
+import { getAccessToken } from './actions';
 
 import Header from './components/header';
 import Home from './components/home';
@@ -17,6 +17,7 @@ export class App extends Component {
   
   componentDidMount() {
     this.props.dispatch(fetchMovieTitles());
+    this.props.dispatch(getAccessToken());
   }
 
   getForm(type) {
