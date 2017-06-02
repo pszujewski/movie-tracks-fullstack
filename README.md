@@ -5,7 +5,7 @@
 
 Movie Tracks allows users to keep track of and listen to their favorite movie soundtracks.
 
-* [View the Deployed Site]()
+* [View the Deployed Site](https://still-temple-36032.herokuapp.com/)
 
 **Users can...** 
 * Create an account to save references to their favorite movie soundtracks
