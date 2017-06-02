@@ -2,41 +2,51 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchMovieAlbumData } from '../../actions';
+import { stopSong } from '../../actions';
 import './browse.css';
 
-export function Browse(props) {
+export class Browse extends React.Component {
 
-  function handleClick(event, idx) {
-    event.preventDefault();
-    const movie = props.titles[idx];
-    props.dispatch(fetchMovieAlbumData(movie, props.accessToken));
+  componentDidMount() {
+    if (this.props.audio.isPlaying) {
+      this.props.dispatch(stopSong());
+    }
   }
 
-  function doTitles() {
-    return props.titles.map((title, idx) => {
+  handleClick(event, idx) {
+    event.preventDefault();
+    const movie = this.props.titles[idx];
+    this.props.dispatch(fetchMovieAlbumData(movie, this.props.accessToken));
+  }
+
+doTitles() {
+    return this.props.titles.map((title, idx) => {
       return (
-        <li key={idx} onClick={e => handleClick(e, idx)}>
+        <li key={idx} onClick={e => this.handleClick(e, idx)}>
           <Link to='/'>{title}</Link>
         </li>
       );
     });
   }
 
-  return (
-    <div className='browse-list'>
-      <div className='browse-title'>
-        <h2>Available Movies</h2>
+  render() {
+    return (
+      <div className='browse-list'>
+        <div className='browse-title'>
+          <h2>Available Movies</h2>
+        </div>
+        <ul>
+          {this.doTitles()}
+        </ul>
       </div>
-      <ul>
-        {doTitles()}
-      </ul>
-    </div>
-  );
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
   titles: state.autoComplete.titles,
-  accessToken: state.movie.accessToken
+  accessToken: state.movie.accessToken,
+  audio: state.audio
 });
 
 export default connect(mapStateToProps)(Browse);

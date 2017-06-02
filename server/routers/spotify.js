@@ -28,7 +28,6 @@ router.get('/access-token', (req, res) => {
   // Retrieve an access token.
   return retrieveAccessToken()
     .then(accessData => {
-      console.log(accessData.body.access_token);
       return res.status(200).json(accessData);
     })
     .catch(err => console.log(err));

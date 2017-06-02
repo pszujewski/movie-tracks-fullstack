@@ -25,6 +25,11 @@ export class Music extends React.Component{
     }
   }
 
+  componentWillUnmount() {
+    this.audio.pause();
+    this.props.dispatch(stopSong());
+  }
+
   playSong() {
     return new Promise((resolve, reject) => { 
       this.audio.preload = 'auto';

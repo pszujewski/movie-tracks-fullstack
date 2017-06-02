@@ -28,6 +28,7 @@ Movie Tracks allows users to keep track of and listen to their favorite movie so
 * skeleton.CSS
 * React.js
 * Redux
+* Material UI autocomplete component
 * Node.js
 * express.js
 * MongoDB

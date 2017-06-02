@@ -60,7 +60,7 @@ export class Favorites extends React.Component {
   handleListen(event, idx) {
     event.preventDefault();
     const movie = this.props.user.favorites[idx].title;
-    this.props.dispatch(fetchMovieAlbumData(movie));
+    this.props.dispatch(fetchMovieAlbumData(movie, this.props.accessToken)); 
   }
 
   getFavsList() {
@@ -123,6 +123,7 @@ export class Favorites extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  accessToken: state.movie.accessToken,
   user: state.user.data
 });
 
