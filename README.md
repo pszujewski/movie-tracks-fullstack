@@ -1,4 +1,4 @@
-# Movie Tracks: Listen to the music from your favorite movies 
+# Movie Tracks
 ![Homepage image](https://github.com/pszujewski/movie-tracks-fullstack/blob/master/client/src/images/movie-tracks.png)
 
 ## Description
@@ -7,8 +7,7 @@ Movie Tracks allows users to keep track of and listen to their favorite movie so
 
 * [View the Deployed Site]()
 
-**User stories:** 
-Users can...
+**Users can...** 
 * Create an account to save references to their favorite movie soundtracks
 * Browse a full list of available movies and soundtracks
 * Seach for movie titles and listen to their soundtracks
