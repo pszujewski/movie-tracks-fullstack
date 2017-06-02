@@ -1,58 +1,41 @@
-# Thinkful Full Stack Template
+# Movie Tracks: Listen to the music from your favorite movies 
+![Homepage image](https://github.com/pszujewski/movie-tracks-fullstack/blob/master/client/src/images/movie-tracks.png)
 
-A template for developing and deploying full stack JavaScript apps.
+## Description
 
-## Getting started
+Movie Tracks allows users to keep track of and listen to their favorite movie soundtracks.
 
-### Setting up a project
+* [View the Deployed Site]()
+
+**User stories:** 
+Users can...
+* Create an account to save references to their favorite movie soundtracks
+* Browse a full list of available movies and soundtracks
+* Seach for movie titles and listen to their soundtracks
+* Get data on movies they search for, such as release date, ratings and a description
+
+# Getting Started with the project
+
+### Set up
 
 * Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
+* Clone this repository: `https://github.com/pszujewski/movie-tracks-fullstack.git`
 * Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
 
-### Working on the project
+## Built With
+* Spotify web API
+* MovieDB web API
+* CSS
+* skeleton.CSS
+* React.js
+* Redux
+* Node.js
+* express.js
+* MongoDB
+* Mongoose.js
+* Passport.js (Basic Auth)
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+## Author
 
-## Proxying
-
-In development, the full stack template works by proxying requests from port 8080 to the server or the client.  Any requests to routes which start with `/api/`, (for example, `/api/foo`, or `/api/foo/bar`) will be sent to the server.  All other requests, will serve the client.
-
-*tl;dr* Make sure your API endpoints start with `/api`.
-
-## Installing dependencies
-
-Client-side dependencies should be installed into the `client` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/client
-npm install --save dependency-name
-```
-
-Server-side dependencies should be installed into the `server` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/server
-npm install --save dependency-name
-```
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
+* Peter Szujewski
 
